@@ -1,6 +1,6 @@
 <template>
-  <td>
-    <input type="number" maxlength="1" min="1" max="9" v-model="answer">
+  <td v-bind:class="{ 'error': isNotValid }">
+    <input type="number" maxlength="1" min="1" max="9" v-model="answer" v-on:change="answerValid(answer)" :disabled="solved">
   </td>
 </template>
 
@@ -9,21 +9,29 @@ export default {
   name: 'Cell',
   props: {
     row: Number,
-    column: Number
+    column: Number,
+    solved: Boolean
   },
   data () {
     return {
       coordinate: [this.row, this.column],
-      answer: ''
+      answer: '',
+      isNotValid: false
     }
   }
 }
 </script>
 
 <style>
+@media (min-width: 992px) { 
+  td {
+    height: 59px;
+  }
+}
+
 td {
+  text-align: center;
   border: 1px black solid;
-  height: 3.7em;
 }
 
 td:nth-child(3), td:nth-child(6) {
@@ -34,7 +42,12 @@ input {
   text-align: center;
   border: none !important;
   padding: 0 !important;
-  font-size: 3rem;
+  font-size: 2.8rem;
+  background: transparent;
+}
+
+input:focus {
+  outline: none;
 }
 
 input[type=number]::-webkit-inner-spin-button, 

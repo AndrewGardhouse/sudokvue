@@ -7,13 +7,13 @@ export default {
     return newColumn
   },
   checkBox (coordinate, board) {
-    let row, column
+    let row, column, maxRow, maxColumn
     [row, column] = coordinate
 
     row = Math.floor(row / 3) * 3
     column = Math.floor(column / 3) * 3
-    const maxColumn = column + 2
-    const maxRow = row + 2
+    maxColumn = column + 2
+    maxRow = row + 2
 
     let boxArray = []
     for (let r = row; r <= maxRow ;r++) {

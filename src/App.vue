@@ -2,31 +2,28 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <div class="column column-100"> 
-          <h1>Sudokvue: <small>A Sudoku Solver Built With VueJS</small></h1>
-        </div>
+        <h1 class="title text-center">Sudokvue: <small>A Sudoku Solver Built With VueJS</small></h1>
       </div>
       <div class="row">
-        <div class="column column-50 column-offset-20">
+        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
           <table>
-            <tr is="row" :row="0"></tr>
-            <tr is="row" :row="1"></tr>
-            <tr is="row" :row="2"></tr>          
-            <tr is="row" :row="3"></tr>
-            <tr is="row" :row="4"></tr>
-            <tr is="row" :row="5"></tr>
-            <tr is="row" :row="6"></tr>
-            <tr is="row" :row="7"></tr>
-            <tr is="row" :row="8"></tr>
+            <tr is="row" :row="0" :solved='solved'></tr>
+            <tr is="row" :row="1" :solved='solved'></tr>
+            <tr is="row" :row="2" :solved='solved'></tr>
+            <tr is="row" :row="3" :solved='solved'></tr>
+            <tr is="row" :row="4" :solved='solved'></tr>
+            <tr is="row" :row="5" :solved='solved'></tr>
+            <tr is="row" :row="6" :solved='solved'></tr>
+            <tr is="row" :row="7" :solved='solved'></tr>
+            <tr is="row" :row="8" :solved='solved'></tr>
           </table>
+          <div class="text-center">
+            <button class="btn btn-success" v-on:click="solvePuzzle" :disabled="solved">Solve Puzzle</button>
+            <button class="btn btn-danger" v-on:click="clearPuzzle">Clear Board</button>            
+          </div>
         </div>
-        <div class="column column-25"> 
-          <button class="button" v-on:click="solvePuzzle">Solve Puzzle</button>
-          <button class="button" v-on:click="clearPuzzle">Clear Puzzle</button>
-        </div>
-      </div>        
+      </div>
     </div>
-    <!-- <img class="logo" src="./assets/logo.png"> -->
   </div>
 </template>
 
@@ -41,11 +38,9 @@ export default {
   data () {
     return {
       puzzle: [],
-      emptySpots: []
+      emptySpots: [],
+      solved: false
     }
-  },
-  created () {
-    window.hello = this.$children.sort((a, b) => {return a.row - b.row})
   },
   methods: {
     createPuzzle () {
@@ -99,8 +94,12 @@ export default {
           i--
         }
       }
+      this.solved = true
     },
     clearPuzzle () {
+      if (this.solved) {
+        this.solved = false
+      }
       for (var i = 0; i < this.$children.length; i++) {
         for (var j = 0; j < this.$children[i].$children.length; j++) {
           this.$children[i].$children[j].answer = ''
@@ -112,42 +111,18 @@ export default {
 </script>
 
 <style>
-h1 {
-  text-align: center;
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif; 
+  background-color: #e6f2ff; 
 }
 
-tr {
-  border-right: 3px solid black;
-  border-left: 3px solid black;
+table {
+  width: 100%;
+  margin-bottom: 2%;
+  background-color: white; 
 }
 
-tr:first-child {
-  border-top: 3px solid black;
-}
-
-tr:nth-child(3), tr:nth-child(6), tr:last-child {
-  border-bottom: 3px solid black;
-}
-
-td {
-  border: 1px black solid;
-  height: 3.7em;
-}
-
-td:nth-child(3), td:nth-child(6) {
-  border-right: 3px solid black;
-}
-
-input {
-  text-align: center;
-  border: none !important;
-  padding: 0 !important;
-  font-size: 3rem;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.title {
+  margin-bottom: 2%;
 }
 </style>
