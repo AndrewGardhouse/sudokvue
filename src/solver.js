@@ -1,9 +1,11 @@
+import _ from 'underscore'
+
 export default {
   checkRow (row, board) {
     return board[row]
   },
   checkColumn (column, board) {
-    let newColumn = board.map((row) => row[column])
+    let newColumn = _.map(board, (row) => row[column])
     return newColumn
   },
   checkBox (coordinate, board) {
@@ -25,6 +27,6 @@ export default {
     return boxArray
   },
   answerFits (answer, coordinate, board) {
-    return !this.checkRow(coordinate[0], board).includes(answer) && !this.checkColumn(coordinate[1], board).includes(answer) && !this.checkBox(coordinate, board).includes(answer)
+    return !_.contains(this.checkRow(coordinate[0], board), answer) && !_.contains(this.checkColumn(coordinate[1], board), answer) && !_.contains(this.checkBox(coordinate, board), answer)
   }
 }

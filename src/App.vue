@@ -17,7 +17,7 @@
             <tr is="row" :row="7" :solved='solved'></tr>
             <tr is="row" :row="8" :solved='solved'></tr>
           </table>
-          <div class="text-center">
+          <div class="text-center buttons">
             <button class="btn btn-success" v-on:click="solvePuzzle" :disabled="solved">Solve Puzzle</button>
             <button class="btn btn-danger" v-on:click="clearPuzzle">Clear Board</button>            
           </div>
@@ -122,7 +122,7 @@ table {
   background-color: white; 
 }
 
-.title {
-  margin-bottom: 2%;
+.title, .buttons {
+  margin-bottom: 1%;
 }
 </style>
