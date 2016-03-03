@@ -1,6 +1,6 @@
 <template>
   <td v-bind:class="{ 'error': isNotValid }">
-    <input type="number" maxlength="1" min="1" max="9" v-model="answer" v-on:change="answerValid(answer)" :disabled="solved">
+    <input type="number" maxlength="1" min="1" max="9" v-model="answer" :disabled="solved">
   </td>
 </template>
 
@@ -52,6 +52,7 @@ input:focus {
 
 input[disabled] {
   color: black !important;
+  opacity: 1;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
