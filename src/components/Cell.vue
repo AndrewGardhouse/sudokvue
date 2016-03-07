@@ -1,5 +1,5 @@
 <template>
-  <td v-bind:class="{ 'error': isNotValid }">
+  <td v-bind:class="{ 'error': isNotValid, 'puzzle' : puzzleAnswer }">
     <input type="number" maxlength="1" min="1" max="9" v-model="answer" v-on:change="checkAnswer(answer)" :disabled="solved">
   </td>
 </template>
@@ -18,7 +18,8 @@ export default {
     return {
       coordinate: [this.row, this.column],
       answer: '',
-      isNotValid: false
+      isNotValid: false,
+      puzzleAnswer: false
     }
   },
   created () {
@@ -79,5 +80,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .error {
   background-color: rgb(255, 153, 153);
+}
+
+.puzzle {
+  background-color: rgba(0, 0, 0, 0.1); 
 }
 </style>

@@ -62,6 +62,8 @@ export default {
         for (let column = 0; column < this.$children[row].$children.length; column++) {
           if (this.$children[row].$children[column].answer === '') {
             this.emptySpots.push(this.$children[row].$children[column])
+          } else {
+            this.$children[row].$children[column].puzzleAnswer = true
           }
         }
       }
@@ -101,6 +103,7 @@ export default {
       }
       for (var i = 0; i < this.$children.length; i++) {
         for (var j = 0; j < this.$children[i].$children.length; j++) {
+          this.$children[i].$children[j].puzzleAnswer = false
           this.$children[i].$children[j].answer = ''
           this.$children[i].$children[j].isNotValid = false
         }
