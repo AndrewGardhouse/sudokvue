@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import solver from '../solver.js'
+
 export default {
   name: 'Cell',
   props: {
@@ -19,13 +21,17 @@ export default {
       isNotValid: false
     }
   },
+  created () {
+    this.$parent.$parent.createPuzzle()
+  },
   methods: {
     checkAnswer (answer) {
-      if (answer > 9 || answer < 0) {
+      if (answer > 9 || answer < 0 || !solver.answerFits(Number(answer), this.coordinate, this.$parent.$parent.puzzle) && answer !== '') {
         this.isNotValid = true
       } else {
         this.isNotValid = false
       }
+      this.$parent.$parent.createPuzzle()
       this.$parent.$parent.canSolve()
     }
   }

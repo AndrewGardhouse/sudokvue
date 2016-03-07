@@ -14,7 +14,7 @@
       </table>
       <div class="text-center buttons">
         <div v-if="canNotSolve">
-          <h4>You must fix these errors before you can submit</h4>
+          <h4>You must fix these errors before the puzzle can be solved</h4>
         </div>      
         <div v-else>
           <button class="btn btn-success" v-on:click="solvePuzzle" :disabled="solved">Solve Puzzle</button>
@@ -105,6 +105,8 @@ export default {
           this.$children[i].$children[j].isNotValid = false
         }
       }
+      this.puzzle = []
+      this.createPuzzle()
     },
     canSolve () {
       // if any of the cells have the isNotValid flag, set canNotSolve to true and end the function call
