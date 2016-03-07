@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import solver from '../solver.js'
+import validation from '../solver.js'
 
 export default {
   name: 'Cell',
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     checkAnswer (answer) {
-      if (answer > 9 || answer < 0 || !solver.answerFits(Number(answer), this.coordinate, this.$parent.$parent.puzzle) && answer !== '') {
+      if (answer > 9 || answer < 0 || !validation.answerFits(Number(answer), this.coordinate, this.$parent.$parent.puzzle) && answer !== '') {
         this.isNotValid = true
       } else {
         this.isNotValid = false
