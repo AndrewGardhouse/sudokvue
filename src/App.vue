@@ -11,12 +11,10 @@
 
 <script>
 import Board from './components/Board.vue'
-import Info from './components/Info.vue'
 
 export default {
   components: {
-    Board,
-    Info
+    Board
   }
 }
 </script>

@@ -13,8 +13,13 @@
         <tr is="row" :row="8" :solved='solved'></tr>
       </table>
       <div class="text-center buttons">
-        <button class="btn btn-success" v-on:click="solvePuzzle" :disabled="solved">Solve Puzzle</button>
-        <button class="btn btn-danger" v-on:click="clearPuzzle">Clear Board</button>       
+        <div v-if="canNotSolve">
+          <h4>You must fix these errors before you can submit</h4>
+        </div>      
+        <div v-else>
+          <button class="btn btn-success" v-on:click="solvePuzzle" :disabled="solved">Solve Puzzle</button>
+          <button class="btn btn-danger" v-on:click="clearPuzzle">Clear Board</button>          
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +37,8 @@ export default {
     return {
       puzzle: [],
       emptySpots: [],
-      solved: false
+      solved: false,
+      canNotSolve: false
     }
   },
   methods: {
@@ -96,6 +102,20 @@ export default {
       for (var i = 0; i < this.$children.length; i++) {
         for (var j = 0; j < this.$children[i].$children.length; j++) {
           this.$children[i].$children[j].answer = ''
+          this.$children[i].$children[j].isNotValid = false
+        }
+      }
+    },
+    canSolve () {
+      // if any of the cells have the isNotValid flag, set canNotSolve to true and end the function call
+      console.log('canSolve() is being called')
+      for (var i = 0; i < this.$children.length; i++) {
+        for (var j = 0; j < this.$children[i].$children.length; j++) {
+          if (this.$children[i].$children[j].isNotValid) {
+            this.canNotSolve = true
+            return
+          }
+          this.canNotSolve = false
         }
       }
     }
